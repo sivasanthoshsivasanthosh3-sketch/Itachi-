@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff9de2, #ffb347, #ffe066, #a8edea, #c3aaff);
+    background-size: 400% 400%;
+    animation: bgShift 8s ease infinite;
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+  }
+
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating particles */
+  .particle {
+    position: fixed;
+    pointer-events: none;
+    animation: floatUp linear infinite;
+    z-index: 0;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  .scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 30px 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .title-top {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.6rem;
+    color: #fff;
+    text-shadow: 2px 3px 10px rgba(180,0,100,0.4);
+    margin-bottom: 20px;
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.04); }
+  }
+
+  /* ── Envelope ── */
+  .envelope-wrap { cursor: pointer; user-select: none; }
+
+  .envelope {
+    width: 340px;
+    height: 220px;
+    position: relative;
+  }
+
+  .envelope-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff6fbc, #ff9a5c);
+    border-radius: 12px 12px 16px 16px;
+    box-shadow: 0 12px 40px rgba(255,80,160,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .envelope-flap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 110px;
+    background: linear-gradient(160deg, #ff9de2, #ff6fbc);
+    clip-path: polygon(0 0, 50% 65%, 100% 0);
+    transform-origin: top center;
+    transition: transform 0.7s ease;
+    z-index: 3;
+  }
+  .envelope.open .envelope-flap { transform: rotateX(180deg); }
+
+  .env-left {
+    position: absolute; bottom: 0; left: 0;
+    width: 50%; height: 110px;
+    background: linear-gradient(to bottom right, #ffb347, #ff6fbc);
+    clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    z-index: 1;
+  }
+  .env-right {
+    position: absolute; bottom: 0; right: 0;
+    width: 50%; height: 110px;
+    background: linear-gradient(to bottom left, #ffe066, #ff9de2);
+    clip-path: polygon(0 100%, 100% 100%, 0 0);
+    z-index: 1;
+  }
+  .env-heart {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2.2rem; z-index: 4;
+    animation: hb 1.2s ease-in-out infinite;
+  }
+  @keyframes hb {
+    0%,100% { transform: translate(-50%,-50%) scale(1); }
+    50%      { transform: translate(-50%,-50%) scale(1.3); }
+  }
+
+  .tap-hint {
+    margin-top: 14px;
+    font-size: 0.95rem;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  /* ── Letter ── */
+  .letter-wrap {
+    display: none;
+    width: 100%;
+    max-width: 560px;
+    animation: slideIn 0.6s ease forwards;
+  }
+  @keyframes slideIn {
+    from { opacity:0; transform:translateY(40px) scale(0.95); }
+    to   { opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .letter {
+    background: #fffaf6;
+    border-radius: 18px;
+    padding: 44px 38px 38px;
+    box-shadow: 0 16px 50px rgba(255,80,160,0.22), 0 2px 8px rgba(0,0,0,0.06);
+    position: relative;
+    border-top: 8px solid #ff6fbc;
+    overflow: hidden;
+  }
+  .letter::before {
+    content: '';
+    position: absolute; top:0;left:0;right:0;bottom:0;
+    background: repeating-linear-gradient(transparent,transparent 31px,#ffd6ee 31px,#ffd6ee 32px);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .letter-deco-top {
+    display: flex; justify-content: center; gap: 10px;
+    font-size: 1.6rem; margin-bottom: 18px;
+    animation: sway 3s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%,100%{transform:rotate(-3deg);} 50%{transform:rotate(3deg);}
+  }
+
+  .letter-date {
+    font-size: 0.85rem; color: #e05a9c;
+    text-align: right; margin-bottom: 14px; font-style: italic;
+  }
+  .letter-greeting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.1rem; color: #d6006a; margin-bottom: 18px;
+  }
+  .letter-body p {
+    font-size: 1rem; color: #4a2040;
+    line-height: 1.9; margin-bottom: 14px; position: relative; z-index: 1;
+  }
+  .hl {
+    background: linear-gradient(120deg, #ff6fbc 0%, #ffb347 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; font-weight: 600;
+  }
+  .letter-sign {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.75rem; color: #d6006a;
+    text-align: right; margin-top: 22px;
+  }
+  .letter-deco-bottom {
+    display: flex; justify-content: center;
+    gap: 8px; font-size: 1.4rem; margin-top: 22px;
+  }
+
+  /* Confetti burst */
+  .confetti-burst {
+    position: fixed; top:0; left:0;
+    width:100vw; height:100vh;
+    pointer-events: none; z-index: 999; overflow: hidden;
+  }
+  .cp {
+    position: absolute; top: -10px;
+    animation: cf 2.5s ease-out forwards; opacity: 0;
+  }
+  @keyframes cf {
+    0%   { transform: translateY(0) rotate(0deg); opacity:1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity:0; }
+  }
+
+  .back-btn {
+    margin-top: 22px;
+    padding: 11px 30px;
+    border: none; border-radius: 50px;
+    background: linear-gradient(135deg, #ff6fbc, #ffb347);
+    color: #fff; font-size: 1rem;
+    font-family: 'Quicksand', sans-serif; font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(255,80,160,0.35);
+    transition: transform 0.2s;
+  }
+  .back-btn:hover { transform: scale(1.05); }
+</style>
+</head>
+<body>
+
+<div class="confetti-burst" id="burst"></div>
+<div id="pContainer"></div>
+
+<div class="scene">
+  <div class="title-top">🎂 Happy Birthday, My Love! 🎂</div>
+
+  <!-- ENVELOPE -->
+  <div id="envView">
+    <div class="envelope-wrap" onclick="openLetter()">
+      <div class="envelope" id="env">
+        <div class="envelope-body">
+          <div class="env-left"></div>
+          <div class="env-right"></div>
+          <div class="env-heart">💝</div>
+          <div class="envelope-flap"></div>
+        </div>
+      </div>
+    </div>
+    <p class="tap-hint">💌 Tap the envelope to open your letter!</p>
+  </div>
+
+  <!-- LETTER -->
+  <div class="letter-wrap" id="letterView">
+    <div class="letter">
+      <div class="letter-deco-top">🌹 🌸 🌷 🌸 🌹</div>
+      <div class="letter-date">March 29, 2025</div>
+      <div class="letter-greeting">My Dearest Love,</div>
+      <div class="letter-body">
+        <p>Today the whole universe is celebrating because <span class="hl">YOU were born!</span> 🎉 And honestly, it's the best thing that ever happened — especially for me. 💖</p>
+        <h1>Hloo lathika... 🫴🤍 Ila ila Hloo kullachi (⁠◔⁠‿⁠◔⁠)</h1>
+        <p>Today it's your birthday 🎂</p>
+      <p> So whish you many more happy returns of the day kullachi .... 🎉(⁠✷⁠‿⁠✷⁠)</p>
+       Namba 8 sept 2025 la first pesunom na apa than una first pathen apram enaku una romba pudichuthu.... 🤍
+       Apram nee enaku neraiya vishyathula kuda iruthuruka so Athuku na unaku thanks nichyama solanum (⁠◔⁠‿⁠◔⁠)
+       Apram inayaoda 7 months aguthu namba pesi enala atha nichyama namba mudiyala diii 💝🫂 
+       Ipa varaikum na unkita irunthu nee enakita irunthum. Yarukumae theriyatha secrets kuda namba rendu perum share panirukum .... 😊
+       Na avlo la intresting ana person ila  irunthalum nee still yen kita pesikitu Iruka atha ethaiyum ethir pakam so thanks ... 🫰
+       Nee en life la Ethuku vantha yenn vantha ethuvumae enaku theriyathu ana you're best and loveable chapter of my life .... 😉
+       Nee epayum ipa mari sirchikitae irukanum na God kita ketukren so smile and namba bond forever nu .....♾️</p>
+       <h2> oru promise pananum 🫴</h2>
+       <p>Athu nee mathavangala pathi romba care pani un udamba ketuthukura avanga una kashtamae paduthi irunthalum nee avangalaukaga un udamba kashtapaduthikra ...i hope nee itha korachipanu ok madam ....🫰🎂 Ok madam romba neram blade potuten poitu vanga ...one second Happy Happy Birthday lathika, izume ,princess, kullachi,muttogoes💝🫂🫴👑</p>
+      </div>
+      <div class="letter-sign">Forever yours, with all my heart 💕<br>Your Love 🌹</div>
+      <div class="letter-deco-bottom">🎈 🎂 ⭐ 🌸 🎊 💖 🎉</div>
+    </div>
+    <button class="back-btn" onclick="closeLetter()">💌 Close Letter</button>
+  </div>
+</div>
+
+<script>
+  const emojis = ['💖','🌸','⭐','🎈','🌹','✨','🌷','🎊','💝','🌺','🎂','🌟'];
+  const pCont = document.getElementById('pContainer');
+
+  function spawnParticle() {
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (14 + Math.random() * 18) + 'px';
+    el.style.animationDuration = (5 + Math.random() * 6) + 's';
+    el.style.animationDelay = (Math.random() * 2) + 's';
+    pCont.appendChild(el);
+    setTimeout(() => el.remove(), 12000);
+  }
+
+  for (let i = 0; i < 10; i++) setTimeout(spawnParticle, i * 400);
+  setInterval(spawnParticle, 700);
+
+  function launchConfetti() {
+    const colors = ['#ff6fbc','#ffb347','#ffe066','#a8edea','#c3aaff','#ff4d4d','#7effd4'];
+    const burst = document.getElementById('burst');
+    for (let i = 0; i < 90; i++) {
+      const p = document.createElement('div');
+      p.className = 'cp';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.width  = (8 + Math.random() * 10) + 'px';
+      p.style.height = (8 + Math.random() * 10) + 'px';
+      p.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDelay    = (Math.random() * 1.2) + 's';
+      p.style.animationDuration = (1.8 + Math.random() * 1.2) + 's';
+      burst.appendChild(p);
+      setTimeout(() => p.remove(), 3500);
+    }
+  }
+
+  function openLetter() {
+    document.getElementById('env').classList.add('open');
+    setTimeout(() => {
+      document.getElementById('envView').style.display = 'none';
+      document.getElementById('letterView').style.display = 'block';
+      launchConfetti();
+    }, 700);
+  }
+
+  function closeLetter() {
+    document.getElementById('letterView').style.display = 'none';
+    document.getElementById('envView').style.display = 'block';
+    document.getElementById('env').classList.remove('open');
+  }
+</script>
+</body>
+</html>
